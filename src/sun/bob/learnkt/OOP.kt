@@ -1,5 +1,7 @@
 package sun.bob.learnkt
 
+import kotlin.reflect.jvm.internal.impl.javax.inject.Inject
+
 /**
  * Created by bob.sun on 15/11/19.
  */
@@ -37,7 +39,19 @@ class PrivateKlass private constructor(arg :String){
 //All classes in Kotlin have a common superclass `Any`
 //`Any` is similar to but NOT `java.lang.Object`
 open class Person(name :String, gender :String, age :Int){
+    //todo Variables , Getters & Setters
     var name :String
+        get() = name
+        set(value) {
+            name = value + " - setted via setter"
+        }
+    //todo Private Setters & Inject setters
+    var property :String = "Money"
+        private set
+
+    var curse :Any = "Fuck"
+        @Inject set
+
     init {
         this.name = name
     }
@@ -60,6 +74,8 @@ class Staff: Person{
 //todo Interfaces
 //  Interfaces' functions are declared as open by default.
 interface Action1{
+    //Properties are allowed in interface
+    var name :String
     fun doAction()
 }
 open class Action2{
@@ -70,6 +86,11 @@ open class Action2{
 }
 //todo Interfaces Implementation
 class ImplItf() : Action1, Action2(){
+    //Properties are allowed in interface
+    override var name: String
+        get() = "default"
+        set(value) {
+        }
     override fun doAction() {
         //todo Supertype in Inheritance
         //  You can specify a super class when using supertype keyword in Kotlin
@@ -91,6 +112,11 @@ class ImplAbs(): abs(){
     }
 
 }
+//todo Back Field?
+//WTF is back field?
+
+
+
 fun main(args: Array<String>) {
     //todo Create an Object with Class
     var Klass = Klass("WTF")
